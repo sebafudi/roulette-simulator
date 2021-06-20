@@ -1,0 +1,51 @@
+@media screen and (max-width:1020px) {
+    #sideBar {
+        width: 80%;
+    }
+    #roulletteContainer {
+        left: 0;
+        padding: 5px;
+    }
+    #rouletteC {
+        left: 0;
+        right: 0;
+        width: inherit;
+    }
+    #pageContainer {
+        left: 0;
+    }
+    #sideBarInfo > .toggleSideBar {
+        display: inline-block;
+    }
+    #roullettePreviousBets {
+        right: 1%;
+    }
+    #usersOnline::after {
+        content: '';
+    }
+    #buttonsContainer {
+        display: none;
+    }
+    #roulettePreviousBetsText {
+        position: absolute;
+        right: calc(1% + 210px);
+        top: 20px;
+        padding: 10px;
+        line-height: 45.45px;
+        font-size: 1.5em;
+    }
+}
+@media screen and (max-width:800px) {
+    #roullettePreviousBets > li:nth-child(6),#roullettePreviousBets > li:nth-child(7),#roullettePreviousBets > li:nth-child(8), #roullettePreviousBets > li:nth-child(9), #roullettePreviousBets > li:nth-child(10) {
+        display: none;
+    }
+    .betButton {
+        font-size: 1em;
+        height: 50px;
+        line-height: 50px;
+    }
+    #roulettePreviousBetsText {
+        position: absolute;
+        right: calc(1% + 110px);
+    }
+}

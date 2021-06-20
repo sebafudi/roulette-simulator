@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>ZeusCSGO.com</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
+	<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/mstyle.css">
+	<meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0' name='viewport' />
+	<link href="https://fonts.googleapis.com/css?family=Lato:400,700,900&amp;subset=latin-ext" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Dosis:400,600,700,800&amp;subset=latin-ext" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,900&amp;subset=cyrillic,cyrillic-ext,latin-ext" rel="stylesheet">
+	<link rel="stylesheet" href="/fontello/css/fontello.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/components/core.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/components/sha256.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/components/hmac.js"></script>
+	<script src="/javascripts/jquery-3.2.1.min.js"></script>
+	<script src="javascripts/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+	<script type="text/javascript" src="plugins/jquery.shiftenter.js"></script>
+	<script type="text/javascript" src="javascripts/app.js"></script>
+	<script type="text/javascript" src="javascripts/roulette.js"></script>
+	<script type="text/javascript" src="javascripts/chat.js"></script>
+	<link href="plugins/jquery.shiftenter.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+</head>
+<body>
+	<div id='background'></div>
+	<div id='navBar'>
+		<img id='logoIMG' src='images/logo4.png'></img>
+		<table id='buttonsContainer'>
+			<td class='navButton roulette'><i class="navBarIcon icon-circle-notch"></i>Roulette</td>
+			<td class='navButton coinFlip'><i class="navBarIcon icon-adjust"></i>Coin Flip</td>
+			<td class='navButton affiliates'><i class="navBarIcon icon-users"></i>Affiliates</td>
+			<td class='navButton freeCoins'><i class="navBarIcon icon-gitlab"></i>Free Coins</td>
+			<td class='navButton deposit'><i class="navBarIcon icon-download"></i>Deposit</td>
+			<td class='navButton withdraw'><i class="navBarIcon icon-basket"></i>Withdraw</td>
+		</table>
+		<table id='accInfo'>
+			<%if (typeof req.session['id64'] !== 'undefined') {%>
+				<tr>
+					<th colspan='2'>
+						<table>
+							<tr>
+								<th><img src="<%=req.session['userAvatar']%>" /></th>
+								<th><%=req.session['userNick']%></th>
+							</tr>
+						</table>
+					</th>
+					<th><i class='fa fa-bars'></i></th>
+				</tr>
+				<tr>
+					<td colspan="2"><i class="fa fa-usd balanceIcon"></i><span class='userBalance'></span></td>
+					<td><i class='fa fa-plus addBalanceIcon'></i></td>
+				</tr>
+			<%} else {%>
+				<td><form action='/auth/openid' method='post'><input name='submit' type='image' id='steamLogin' src='https://steamcommunity-a.akamaihd.net/public/images/signinthroughsteam/sits_01.png' /></form></td>
+			<%}%>
+		</table>
+	</div>
+	<div id='sideBar'>
+		<table id='sideBarNav'>
+			<tr>
+				<td id='closeSideBar'><i class="fa fa-times" aria-hidden="true"></i></td>
+			</tr>
+			<tr>
+				<td id='openChatSideBar'><i class="fa fa-comment" aria-hidden="true"></i></td>
+			</tr>
+			<tr>
+				<td id='openStatsSideBar'><i class="fa fa-bar-chart" aria-hidden="true"></i></td>
+			</tr>
+			<tr>
+				<td id='openAdminSideBar'><i class="fa fa-cogs" aria-hidden="true"></i></td>
+			</tr>
+			<tr>
+				<td id='openBetHistory'><i class="fa fa-history" aria-hidden="true"></i></td>
+			</tr>
+		</table>
+		<div id='sideBarInfo'>
+			<div class='twitterIcon'><a target='_blank' href='https://twitter.com/csvictorycom'><i class="icon-twitter"></i></a></div>
+			<div class='discordIcon'><a target='_blank' href='https://discord.gg/MhkdECj'><img src='/images/discord.png' /></a></div>
+			<div class='steamIcon'><a target='_blank' href='http://steamcommunity.com/groups/csvictorycom'><i class="icon-steam"></i></a></div>
+			<div class='rouletteVolume'>
+			<i class="fa fa-volume-up" aria-hidden="true"></i></div>
+			<div id='usersOnline'><i class="icon-user"></i><span id='usersOnlineCount'></span></div>
+		</div>
+		<div id='chatContainer' class='sideBarCard'>
+			<div id='chatMessages'>
+			</div>
+				<%if (typeof req.session['id64'] !== 'undefined') {%>
+					<form id="chatInput" onSubmit="sendChatMessage(); return false;">
+						<textarea id='chatTextArea' placeholder="SAY SOMETHING..."></textarea>
+					</form>
+				<%} else {%>
+					<form id="chatInput" onSubmit="sendChatMessage(); return false;">
+						<textarea id='chatTextArea' disabled placeholder="Log in to chat"></textarea>
+					</form>
+				<%}%>
+		</div>
+		<div id='userStats' class='sideBarCard'>
+			d
+		</div>
+		<div id='adminSetting' class='sideBarCard'>
+			halo admin
+		</div>
+		</div>
+	</div>
+	<div id='pageContainer'>
+		<div id='roulletteContainer'>
+			<div id='timerContainer'>
+				<div id='timerProgress'></div>
+				<div id='timer'></div>
+			</div>
+			<div id='rouletteC'>
+				<table id='roulette'>
+					<tr>
+					</tr>
+				</table>
+				<div id='rouletteShadow'></div>
+				<div id='rouletteSelector'></div>
+			</div>
+			<div id='roulettePreviousBetsText'>Previous Rolls:</div>
+			<ul id='roullettePreviousBets'>
+			</ul>
+			<div id='rouletteBets'>
+				<div id='redBets' class='betArea'>
+					<div id='betRed' class='betButton'>1-7, Win 2x</div>
+				</div>
+				<div id='greenBets' class='betArea'>
+					<div id='betGreen' class='betButton'>0, Win 14x</div>
+				</div>
+				<div id='blackBets' class='betArea'>
+					<div id='betBlack' class='betButton'>8-14, Win 2x</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
