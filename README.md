@@ -1,10 +1,8 @@
 # roulette-simulator
 Web based roulette simulator, featuring:
 - hash based rounds
-- accounts
+- accounts with steam login
 - chat
 
-Based on an old project, so the code is kinda trash.
-Now cleaning it up a little bit.
-
-Meant to work with steam accounts, but I've abandoned that idea.
+This is an really old project. It looks pretty nice, and all above features works. <br />
+Code inside through is pretty bad, and doesn't follow any rules nor esthetic values.
