@@ -1,5 +1,4 @@
 exports = module.exports = function(socketio, mongoose, Promise, users){
-    let db = mongoose.connecion;
     var chatSchema = mongoose.Schema({
         id64: String,
         date: {
@@ -12,16 +11,6 @@ exports = module.exports = function(socketio, mongoose, Promise, users){
             default: false
         },
     });
-
-
-        // Promise.all([chatModel.find({message: 'gfd'}), chatModel.find({message: 'sg'})]).then(function(res) {
-        //     console.log(res);
-        // })
-    // roulette.db.find({no: 2}).then(function(res) {
-    //     console.log(res);
-    // }).catch(function(err) {
-    //     throw (err);
-    // })
     var chatModel = mongoose.model('message', chatSchema);
     socketio.on('connection', function (socket) {
         socket.on('chat load', function() {
@@ -32,7 +21,6 @@ exports = module.exports = function(socketio, mongoose, Promise, users){
                 .sort({"date": 1})
                 .exec(function(err, results){
                     // handle err
-                    var toSend = [];
                     Promise.each(results, function(message) {
                         return users.db.find({id64: message.id64}).then(function(user) {
                             message.nick = user[0].nick;

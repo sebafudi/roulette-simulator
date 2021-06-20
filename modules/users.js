@@ -34,7 +34,6 @@ exports = module.exports = function(mongoose) {
             default: Date.now
         }
     });
-    var userModel = mongoose.model('user', userSchema);
     var toExport = {
         a: 5,
         db: mongoose.model('user', userSchema)

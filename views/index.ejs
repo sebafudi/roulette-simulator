@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<title>ZeusCSGO.com</title>
+	<title>roulette-simulator</title>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
 	<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
 	<link rel="stylesheet" type="text/css" href="/stylesheets/mstyle.css">
@@ -29,11 +29,7 @@
 		<img id='logoIMG' src='images/logo4.png'></img>
 		<table id='buttonsContainer'>
 			<td class='navButton roulette'><i class="navBarIcon icon-circle-notch"></i>Roulette</td>
-			<td class='navButton coinFlip'><i class="navBarIcon icon-adjust"></i>Coin Flip</td>
-			<td class='navButton affiliates'><i class="navBarIcon icon-users"></i>Affiliates</td>
 			<td class='navButton freeCoins'><i class="navBarIcon icon-gitlab"></i>Free Coins</td>
-			<td class='navButton deposit'><i class="navBarIcon icon-download"></i>Deposit</td>
-			<td class='navButton withdraw'><i class="navBarIcon icon-basket"></i>Withdraw</td>
 		</table>
 		<table id='accInfo'>
 			<%if (typeof req.session['id64'] !== 'undefined') {%>
