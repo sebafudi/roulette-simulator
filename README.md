@@ -8,7 +8,7 @@ Live version: http://sebafudi.tech/ <br />
 
 # Short description
 This is an really old project. It looks pretty nice, and all above features works.<br />
-Code inside through is pretty bad, and doesn't follow any rules nor esthetic values.<br />
+Code inside is pretty bad, and doesn't follow any rules nor esthetic values.<br />
 
 # How it works
 When app starts, it generates set number of hashes and stores them in mongodb databse. Each hash is based on previous one. Then it iterates throught all of them in reverse order, so it's nearly impossible to guess next number, but extreamly easy to check if previous hash was legit, and not altered in any way.<br />
